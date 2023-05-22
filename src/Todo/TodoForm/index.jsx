@@ -63,7 +63,7 @@ export function TodoForm({ setTodos, todoObj, formType }) {
 			<label>Title:</label>
 			<input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
 			<label>Completed?</label>
-			<input type="checkbox" value={completed} onChange={(e) => setCompleted(e.target.checked)} />
+			<input type="checkbox" checked={completed} onChange={(e) => setCompleted(e.target.checked)} />
 			<button type="submit">{formType} Todo</button>
 		</form>
 	);

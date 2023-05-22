@@ -27,7 +27,7 @@ function App() {
 				<CreateTodo setTodos={setTodos} />
 			</Route>
 			<Route exact path="/todo/:todoId/edit">
-				<EditTodo setTodos={setTodos} />
+				<EditTodo setTodos={setTodos} todos={todos} />
 			</Route>
 
 			<Route>

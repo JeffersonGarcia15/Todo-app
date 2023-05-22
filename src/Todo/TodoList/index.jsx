@@ -19,6 +19,7 @@ function TodoList({ todos, setTodos }) {
 					<button type="submit" onClick={(e) => deleteTodo(e, todo.id)}>
 						Delete Todo
 					</button>
+					<Link to={`/todo/${todo.id}/edit`}>Edit Todo</Link>
 				</div>
 			))}
 		</>
