@@ -5,11 +5,21 @@ export function TodoForm({ setTodos, todoObj, formType }) {
 	const history = useHistory();
 	const [title, setTitle] = useState("");
 	const [completed, setCompleted] = useState(false);
+	const [validations, setValidations] = useState({});
 
 	useEffect(() => {
-		setTitle(todoObj.title);
-		setCompleted(todoObj.completed);
+		setTitle(todoObj?.title);
+		setCompleted(todoObj?.completed);
 	}, [todoObj]);
+
+	useEffect(() => {
+		setValidations({});
+		const errors = {};
+		if (title?.length < 3) {
+			errors.title = "Title must be at least 3 characters";
+		}
+		setValidations(errors);
+	}, [title]);
 
 	async function onSubmit(e) {
 		e.preventDefault();
@@ -57,14 +67,20 @@ export function TodoForm({ setTodos, todoObj, formType }) {
 
 		return;
 	}
+	console.log("FJDKF", todoObj)
+
 
 	return (
-		<form onSubmit={onSubmit}>
-			<label>Title:</label>
-			<input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-			<label>Completed?</label>
-			<input type="checkbox" checked={completed} onChange={(e) => setCompleted(e.target.checked)} />
-			<button type="submit">{formType} Todo</button>
-		</form>
+		<>
+		{validations.title && <p>{validations.title}</p>}
+			<form onSubmit={onSubmit}>
+				<label>Title:</label>
+				<input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+				<label>Completed?</label>
+				<input type="checkbox" checked={completed} onChange={(e) => setCompleted(e.target.checked)} />
+				<button disabled={Object.values(validations).length} type="submit">{formType} Todo</button>
+			</form>
+		
+		</>
 	);
 }
